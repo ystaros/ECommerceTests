@@ -1,6 +1,8 @@
 # Default ignored files
 /shelf/
 /.idea/*
+/.idea/
+/.idea/encodings.xml
 
 # take code on the website: https://www.toptal.com/developers/gitignore
 # search words: java, maven
