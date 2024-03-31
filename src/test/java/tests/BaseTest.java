@@ -9,6 +9,7 @@ package tests;   // - самый низкий доступ - с него над�
 // private - внутри класса
 
 import com.microsoft.playwright.*;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -46,7 +47,6 @@ public abstract class BaseTest {
                 // вывод будет: BaseTestMethod - {browserName1=chromium, browserName2=firefox, isHeadless3=false, 1slowMo1=1500, 1slowMo3=1500, 1slowMo2=1500, isHeadless2=false, isHeadless1=false, browserName3=webkit}
 
                 ReportUtils.logReportHeader();
-                ReportUtils.logLine();
 
                 if (playwright != null){
 //                        System.out.println("Playwright created.");
@@ -60,7 +60,8 @@ public abstract class BaseTest {
 
                 if (browser.isConnected()) {
 //                        System.out.println("Browser "+ browser.browserType().name() + " is connected.");
-                        LoggerUtils.logInfo("Browser "+ browser.browserType().name() + " is connected.");
+                  
+                        LoggerUtils.logInfo("Browser "+ browser.browserType().name() + " is connected.\n");
                 } else {
 //                        System.out.println("FATAL: Browser is NOT connected.");
                         LoggerUtils.logFatal("FATAL: Browser is NOT connected.");
@@ -71,7 +72,6 @@ public abstract class BaseTest {
         @BeforeMethod   // настройка для тестов - самый низкий уровень
         void createContextAndPage(Method method) {
 
-                ReportUtils.logLine();
                 ReportUtils.logTestName(method);
 
                 context = browser.newContext(); // создаем контекст (слепок страницы)
@@ -91,7 +91,8 @@ public abstract class BaseTest {
         }
 
         @AfterMethod
-        void closeContext() {
+        void closeContext(Method method, ITestResult result) {
+
                 if (page != null){
                         page.close();
                         LoggerUtils.logInfo("Page closed.");
@@ -101,7 +102,12 @@ public abstract class BaseTest {
                         LoggerUtils.logInfo("Context closed.");
                 }
 
-                ReportUtils.logLine();
+//                LoggerUtils.logInfo(
+//                        "\n\n" + ReportUtils.getTestName(method) + " ---- " + ReportUtils.getTestRunTime(result)
+//                                + ReportUtils.getLine() + "\n"
+//                );
+                ReportUtils.logTestResult(method, result);
+
         }
 
         @AfterSuite
@@ -114,8 +120,6 @@ public abstract class BaseTest {
                         playwright.close();
                         LoggerUtils.logInfo("Playwright closed.");
                 }
-
-                ReportUtils.logLine();
         }
 
         private boolean isOnHomePage() {
