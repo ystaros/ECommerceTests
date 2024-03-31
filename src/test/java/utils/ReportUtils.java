@@ -1,7 +1,6 @@
 package utils;
 
 import org.testng.ITestResult;
-
 import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -21,6 +20,7 @@ public class ReportUtils {
 
         return LINE;
     }
+
     public static void logReportHeader() {
         final String header = """
                 
@@ -81,8 +81,6 @@ public class ReportUtils {
                 getTestResult(result),
                 ReportUtils.getTestRunTime(result))
                 + getLine()
-
         );
     }
-
 }

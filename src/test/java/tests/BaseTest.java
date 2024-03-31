@@ -60,6 +60,7 @@ public abstract class BaseTest {
 
                 if (browser.isConnected()) {
 //                        System.out.println("Browser "+ browser.browserType().name() + " is connected.");
+                  
                         LoggerUtils.logInfo("Browser "+ browser.browserType().name() + " is connected.\n");
                 } else {
 //                        System.out.println("FATAL: Browser is NOT connected.");
@@ -106,6 +107,7 @@ public abstract class BaseTest {
 //                                + ReportUtils.getLine() + "\n"
 //                );
                 ReportUtils.logTestResult(method, result);
+
         }
 
         @AfterSuite
