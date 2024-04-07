@@ -15,9 +15,8 @@ public final class TestData {
     public static final String MEN = "men";
     public static final String ACCESSORIES = "accessories";
     public static final String ABOUT = "About";
-    public static final String WOMEN_BANNER = "Women \n Apparels";
-    public static final String MEN_BANNER = "men apparels";
-    public static final String ACCESSORIES_BANNER = "Accessories";
+    public static final String WOMEN_BANNER = "women ";
+    public static final String MEN_BANNER = "men ";
 
     @DataProvider(name = "navigationTestData")
     public static Object[][] getNavigationTestData() {

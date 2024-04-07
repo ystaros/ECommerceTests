@@ -21,15 +21,10 @@ public final class NavigationTest extends BaseTest {
         assertThat(getPage()).hasURL(BASE_URL + HOME_END_POINT);
     }
 
-    // @DataProvider - двумерный массив [][]
-    // @Para - двумерный массив [][]
-
+//-------- Menu Navigation -------------------------------------------------------
     @DataProvider(name = "menuNavigationTestData")
     private Object[][] menuNavigationTestData() {
-//        Object[]][] testData = new Object[][]{{"1","11"}, {"2", "22"}, {"3", "33"}};
 
-//        return testData;
-//        return new Object[][]{{"1","11"}, {"2", "22"}, {"3", "33"}};
         return new Object[][]{
                 {MEN, BASE_URL + MEN_END_POINT},
                 {WOMEN, BASE_URL + WOMEN_END_POINT},
@@ -37,18 +32,6 @@ public final class NavigationTest extends BaseTest {
                 {ABOUT, BASE_URL + ABOUT_END_POINT}
         };
     }
-
-//    @Test(dataProvider = "menuNavigationTestData")
-//    public void testMenuNavigatesToCorrespondingPage(String menuName, String correspondingPageEndpoint) {
-//        if (getIsOnHomePage()) {
-//
-//            getPage().getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menuName).setExact(true)).click();
-//
-//            assertThat(getPage()).hasURL(correspondingPageEndpoint);
-//        } else {
-//            Assert.fail();
-//        }
-//    }
 
     @Test(dataProvider = "menuNavigationTestData")
     public void testMenuNavigatesToCorrespondingPage(String menuName, String correspondingPageEndpoint) {
@@ -61,9 +44,34 @@ public final class NavigationTest extends BaseTest {
             Assert.fail();
         }
     }
+//-------- end Menu Navigation -------------------------------------------------------
 
+//-------- Banner Navigation -------------------------------------------------------
     @DataProvider(name = "bannerNavigationTestData")
     private Object[][] getBannerNavigationTestData() {
+
+        return new Object[][]{
+                {WOMEN_BANNER, BASE_URL + WOMEN_END_POINT},
+                {MEN_BANNER, BASE_URL + MEN_END_POINT},
+                {ACCESSORIES, BASE_URL + ACCESSORIES_END_POINT},
+        };
+    }
+
+    @Test(dataProvider = "bannerNavigationTestData")
+    public void testBannerNavigatesToCorrespondingPage(String bannerName, String correspondingPageEndpoint) {
+        if (getIsOnHomePage()) {
+            getPage().locator("//section[@class='collection-container']/a/p[text()='" + bannerName + "']").click();
+
+            assertThat(getPage()).hasURL(correspondingPageEndpoint);
+        } else {
+            Assert.fail();
+        }
+    }
+//-------- end Banner Navigation -------------------------------------------------------
+
+//-------- Banner Navigation with number/index -------------------------------------------------------
+    @DataProvider(name = "bannerNumberNavigationTestData")
+    private Object[][] getBannerNumberNavigationTestData() {
 
         return new Object[][]{
                 {0, BASE_URL + WOMEN_END_POINT},
@@ -72,8 +80,8 @@ public final class NavigationTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "bannerNavigationTestData")
-    public void testBannerNavigatesToCorrespondingPage(int bannerNumber, String correspondingPageEndpoint) {
+    @Test(dataProvider = "bannerNumberNavigationTestData")
+    public void testBannerNumberNavigatesToCorrespondingPage(int bannerNumber, String correspondingPageEndpoint) {
         if (getIsOnHomePage()) {
 
             assertThat(getPage().locator("//section[@class='collection-container']/a/p")).hasCount(3);
@@ -85,7 +93,11 @@ public final class NavigationTest extends BaseTest {
             Assert.fail();
         }
     }
+//-------- end Banner Navigation with index -------------------------------------------------------
 
+//-------- Navigation on Home Page -------------------------------------------------------
+
+//    Перенесли DataProvider в TestData.java
 //    @DataProvider(name = "navigationTestData")
 //    private Object[][] getNavigationTestData() {
 //
@@ -116,7 +128,9 @@ public final class NavigationTest extends BaseTest {
             Assert.fail();
         }
     }
+//-------- end Navigation on Home Page -------------------------------------------------------
 
+//---------------------------------------------------------------
     @Test
     public void testWomenNavigatesToWomenPage() {
         if (getIsOnHomePage()) {
