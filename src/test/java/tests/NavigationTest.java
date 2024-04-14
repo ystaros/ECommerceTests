@@ -15,7 +15,7 @@ import static utils.TestData.*;
 
 public final class NavigationTest extends BaseTest {
     @Test(testName = "Test - landing on the Home Page")
-    public void TestBaseUrlLanding() {
+    public void testBaseUrlLanding() {
         getPage().navigate(BASE_URL);
 
         assertThat(getPage()).hasURL(BASE_URL + HOME_END_POINT);
