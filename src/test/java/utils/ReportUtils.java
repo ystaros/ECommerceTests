@@ -2,8 +2,6 @@ package utils;
 
 import org.testng.ITestResult;
 import java.lang.reflect.Method;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +14,7 @@ public class ReportUtils {
 //    public static void logLine() {
 //        LoggerUtils.logInfo(LINE);
 //    }
-    public static String getLine() {
+    public static String printLine() {
 
         return LINE;
     }
@@ -80,7 +78,7 @@ public class ReportUtils {
                 getTestName(method) + String.format("%" + (70 - getTestName(method).length()) + "s", " "),
                 getTestResult(result),
                 ReportUtils.getTestRunTime(result))
-                + getLine()
+                + printLine()
         );
     }
 }

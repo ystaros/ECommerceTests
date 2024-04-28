@@ -3,6 +3,7 @@
 /.idea/*
 /.idea/
 /.idea/encodings.xml
+.idea/misc.xml
 
 # take code on the website: https://www.toptal.com/developers/gitignore
 # search words: java, maven
@@ -57,3 +58,6 @@ buildNumber.properties
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven
+
+.allure/
+allure-results/

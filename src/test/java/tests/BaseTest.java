@@ -44,14 +44,14 @@ public abstract class BaseTest {
         ReportUtils.logReportHeader();
 
         if (playwright != null) {
-//                        System.out.println("Playwright created.");
 //                        Reporter.log("-----------  Playwright created!!", true); // логи для TestNG
             LoggerUtils.logInfo("Playwright created.");
         } else {
-//                        System.out.println("FATAL: Playwright is NOT created.");
             LoggerUtils.logFatal("FATAL: Playwright is NOT created.");
             System.exit(1); // выходим из системы с кодом ошибки 1
         }
+
+        LoggerUtils.logInfo(ReportUtils.printLine());
     }
 
     @BeforeClass
@@ -59,11 +59,10 @@ public abstract class BaseTest {
         browser = BrowserManager.createBrowser(playwright, ConfigProperties.ENVIRONMENT_CHROMIUM);
 
         if (browser.isConnected()) {
-//                        System.out.println("Browser "+ browser.browserType().name() + " is connected.");
-
+            LoggerUtils.logInfo(ReportUtils.printLine());
             LoggerUtils.logInfo("Browser " + browser.browserType().name() + " is connected.\n");
+            LoggerUtils.logInfo(ReportUtils.printLine());
         } else {
-//                        System.out.println("FATAL: Browser is NOT connected.");
             LoggerUtils.logFatal("FATAL: Browser is NOT connected.");
             System.exit(1); // выходим из системы с кодом ошибки 1
         }
@@ -132,7 +131,9 @@ public abstract class BaseTest {
         if (browser != null && browser.isConnected()) {
             browser.close();
             if(!browser.isConnected()) {
-                LoggerUtils.logInfo("Browser is closed");
+                LoggerUtils.logInfo(ReportUtils.printLine());
+                LoggerUtils.logInfo("Browser " + browser.browserType().name() + " is closed");
+                LoggerUtils.logInfo(ReportUtils.printLine());
             }
         }
     }
